@@ -21,9 +21,45 @@ const cursoController = {
 	listarCursos: async (req, res) => {
 		try {
 			const cursos = await Curso.find().sort({ cargaHoraria: -1 });
-			res.status(500).json(cursos);
+			res.status(200).json(cursos);
 		}catch (erro) {
 			res.status(500).json({ erro: "Erro ao consultar coleção no MongoDB" });
+		}
+	},
+
+	atualizarCurso: async (req, res) => {
+		try {
+			const { id } = req.params;
+			const { nome, descricao, cargaHoraria, categoria, instrutor, status } = req.body;
+
+			const atualizado = await Curso.findByIdAndUpdate(
+				id,
+				{ nome, descricao, cargaHoraria, categoria, instrutor, status },
+				{ new: true, runValidators: true }
+			);
+
+			if(!atualizado) {
+				return res.status(404).json({ erro: "Curso não encontrado."});
+			}
+
+			res.status(200).json(atualizado);
+		} catch (erro) {
+			res.status(400).json({ erro: "Erro ao atualizar o curso.", detalhe: erro.message });
+		}
+	},
+
+	excluirCurso: async (req, res) => {
+		try {
+			const { id } = req.params;
+			const removido = await Curso.findByIdAndDelete(id);
+
+			if(!removido) {
+				return res.status(404).json({erro: "Curso não encontrado para exclusão." });
+			}
+
+			res.status(200).json({ mensagem: "Curso excluído com sucesso!" });
+		} catch {
+			res.status(500).json({ erro: "Erro ao excluir o curso." });
 		}
 	}
 };
