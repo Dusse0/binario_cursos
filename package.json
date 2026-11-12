@@ -2,9 +2,9 @@
   "name": "PROJETO FINAL - BINÁRIO CURSOS",
   "version": "1.0.0",
   "description": "Projeto final (PBE-1) Plataforma de cursos",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  	"start": "node server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
