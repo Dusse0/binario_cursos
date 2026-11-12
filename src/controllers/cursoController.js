@@ -3,6 +3,7 @@ const Curso = require('../models/Curso');
 
 const cursoController = {
 
+// 1. Cria um curso
     criarCurso: async (req, res) => {
         try {
             const { nome, descricao, cargaHoraria, categoria, instrutor } = req.body;
@@ -24,6 +25,7 @@ const cursoController = {
         }
     },
 
+// 2. Lista qualquer curso
     listarCursos: async (req, res) => {
         try {
             const { nome, categoria, status } = req.query;
@@ -53,6 +55,7 @@ const cursoController = {
         }
     },
 
+// 3. Atualiza uma ou mais entidades de um curso
     atualizarCurso: async (req, res) => {
         try {
             const { id } = req.params;
@@ -77,6 +80,7 @@ const cursoController = {
         }
     },
 
+// 4. Exclui um curso
     excluirCurso: async (req, res) => {
         try {
             const { id } = req.params;

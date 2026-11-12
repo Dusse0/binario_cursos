@@ -1,6 +1,8 @@
 const Matricula = require('../models/Matricula');
 
 const matriculaController = {
+
+	// 1. Cria uma nova matricula de um aluno
         criarMatricula: async (req, res) => {
                 try {
                         const { nomeAluno, emailAluno, curso  } = req.body;
@@ -16,7 +18,8 @@ const matriculaController = {
                         res.status(400).json({ erro: "Erro ao salvar a matricula no MongoDB", detalhe: erro.message });
                 }
         },
-
+	
+	// 2. Lista as matriculas dos alunos
         listarMatriculas: async (req, res) => {
                 try {
                         const matriculas = await Matricula.find().sort({ dataMatricula: -1 });
@@ -26,6 +29,7 @@ const matriculaController = {
                 }
         },
 
+	// 3. Possibilita atualizar a matricula de um aluno
         atualizarMatricula: async (req, res) => {
                 try {
                         const { id } = req.params;
@@ -48,6 +52,7 @@ const matriculaController = {
                 }
         },
 
+	// 4. Deleta a matricula do aluno
         excluirMatricula: async (req, res) => {
                 try {
                         const { id } = req.params;
