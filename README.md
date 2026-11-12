@@ -1,45 +1,35 @@
-# BINÁRIO CURSOS
-
-## 1. Apresentação
+BINÁRIO CURSOS
+1. Apresentação
 
 A Binário Cursos é uma API RESTful desenvolvida como projeto final da disciplina de Programação Back-End 1 (PBE1), da instituição Binário Tech.
 
 O projeto tem como objetivo realizar o gerenciamento de cursos e matrículas de alunos, utilizando Node.js, Express e MongoDB.
 
-## 2. Tecnologias utilizadas
-
-- Node.js
-- Express
-- JavaScript
-- MongoDB
-- Mongoose
-- Docker
-- Bash
-- cURL
-- jq
-- Git e GitHub
-
-## 3. Funcionalidades
-
-### 3.1 Cursos
-
-- Cadastrar cursos.
-- Listar cursos.
-- Filtrar cursos por nome, categoria e status.
-- Atualizar cursos.
-- Excluir cursos.
-
-### 3.2 Matrículas
-
-- Cadastrar matrículas.
-- Listar matrículas.
-- Atualizar matrículas.
-- Excluir matrículas.
-- Vincular matrículas aos cursos cadastrados.
-
-## 4. Estrutura do projeto
-
-```text
+2. Tecnologias utilizadas
+Node.js
+Express
+JavaScript
+MongoDB
+Mongoose
+Docker
+Bash
+cURL
+jq
+3. Funcionalidades
+3.1 Cursos
+Cadastrar cursos.
+Listar cursos.
+Filtrar cursos por nome, categoria e status.
+Atualizar cursos.
+Excluir cursos.
+3.2 Matrículas
+Cadastrar matrículas.
+Listar matrículas.
+Atualizar matrículas.
+Excluir matrículas.
+Vincular matrículas aos cursos cadastrados.
+4. Estrutura do projeto
+text
 binario_cursos/
 ├── src/
 │   ├── config/
@@ -56,248 +46,273 @@ binario_cursos/
 ├── .env
 ├── .gitignore
 ├── package.json
+├── package-lock.json
 ├── server.js
-├── testes.sh
-├── resultado_execucao.log
+├── teste_cursos.sh
 └── README.md
-```
 
-## 5. Instalação e configuração
+5. Instalação e configuração
+5.1 Clonar o repositório
+bash
+git clone https://github.com/Dusse0/binario_cursos.git
 
-### 5.1 Clonar o repositório
-
-```bash
-git clone https://github.com/Dusse0/FMT1DEV-T5.git
-```
-
-### 5.2 Acessar a pasta do projeto
-
-```bash
+5.2 Acessar a pasta do projeto
+bash
 cd binario_cursos
-```
 
-### 5.3 Instalar as dependências
-
-```bash
+5.3 Instalar as dependências
+bash
 npm install
-```
 
-### 5.4 Instalar o jq
-
-```bash
+5.4 Instalar o jq
+bash
 sudo apt update
 sudo apt install jq
-```
 
-### 5.5 Configurar as variáveis de ambiente
+5.5 Configurar as variáveis de ambiente
 
-Criar o arquivo `.env`:
+Criar o arquivo .env:
 
-```bash
+bash
 nano .env
-```
 
-Adicionar as seguintes configurações:
 
-```env
+Adicionar:
+
+env
 PORT=1129
 MONGO_URI=mongodb://127.0.0.1:27017/binario_cursos_nosql
-```
 
-## 6. Configuração do MongoDB
+6. Configuração do MongoDB
 
 O projeto utiliza MongoDB em um container Docker.
 
-### 6.1 Criar e iniciar o container
-
-```bash
+6.1 Criar o container
+bash
 docker run -d \
   --name mongodb-binario \
   -p 27017:27017 \
   -v mongodb_binario_data:/data/db \
   mongo:7
-```
 
-### 6.2 Iniciar o container novamente
-
-Caso o container já tenha sido criado e esteja parado:
-
-```bash
+6.2 Iniciar o container existente
+bash
 docker start mongodb-binario
-```
 
-### 6.3 Verificar os containers em execução
-
-```bash
+6.3 Verificar o container
+bash
 docker ps
-```
 
-## 7. Inicialização da API
+7. Inicialização da API
 
-Para iniciar o servidor:
+Iniciar o servidor:
 
-```bash
+bash
 npm start
-```
 
-Para iniciar em modo de desenvolvimento:
 
-```bash
+Ou utilizar o modo de desenvolvimento:
+
+bash
 npm run dev
-```
 
-A API estará disponível no endereço:
 
-```text
+A API estará disponível em:
+
+text
 http://localhost:1129
-```
 
-## 8. Rotas da API
+8. Rotas da API
+8.1 Cursos
+Método	Rota	Descrição
+POST	/cursos	Cadastrar curso
+GET	/cursos	Listar cursos
+PATCH	/cursos/:id	Atualizar curso
+DELETE	/cursos/:id	Excluir curso
 
-### 8.1 Rotas de Cursos
+Query Params disponíveis:
 
-| Método HTTP | Rota | Descrição |
-|---|---|---|
-| POST | /cursos | Cadastrar um curso |
-| GET | /cursos | Listar todos os cursos |
-| PATCH | /cursos/:id | Atualizar um curso |
-| DELETE | /cursos/:id | Excluir um curso |
-
-#### Filtros disponíveis
-
-A listagem de cursos permite utilizar os seguintes Query Params:
-
-- `nome`: filtra pelo nome do curso.
-- `categoria`: filtra pela categoria.
-- `status`: filtra pelo status.
+nome: filtra pelo nome.
+categoria: filtra pela categoria.
+status: filtra pelo status.
 
 Exemplo:
 
-```text
+text
 http://localhost:1129/cursos?categoria=Banco%20de%20Dados
-```
 
-### 8.2 Rotas de Matrículas
+8.2 Matrículas
+Método	Rota	Descrição
+POST	/matriculas	Cadastrar matrícula
+GET	/matriculas	Listar matrículas
+PATCH	/matriculas/:id	Atualizar matrícula
+DELETE	/matriculas/:id	Excluir matrícula
+9. Comandos para testar a API
+9.1 Cadastrar cursos
 
-| Método HTTP | Rota | Descrição |
-|---|---|---|
-| POST | /matriculas | Cadastrar uma matrícula |
-| GET | /matriculas | Listar todas as matrículas |
-| PATCH | /matriculas/:id | Atualizar uma matrícula |
-| DELETE | /matriculas/:id | Excluir uma matrícula |
+Curso do Felipe:
 
-## 9. Códigos de resposta HTTP
+bash
+curl -X POST http://localhost:1129/cursos \
+-H "Content-Type: application/json" \
+-d '{"nome":"Desenvolvimento Back-End","descricao":"Introdução ao desenvolvimento de APIs","cargaHoraria":40,"categoria":"Programação","instrutor":"Felipe"}' | jq
 
-A API utiliza os seguintes códigos HTTP:
 
-| Código | Descrição |
-|---|---|
-| 200 | Requisição realizada com sucesso |
-| 201 | Registro criado com sucesso |
-| 400 | Dados inválidos ou erro na requisição |
-| 404 | Registro não encontrado |
+Curso do Myguel:
 
-## 10. Testes automatizados
+bash
+curl -X POST http://localhost:1129/cursos \
+-H "Content-Type: application/json" \
+-d '{"nome":"Banco de Dados com MongoDB","descricao":"Introdução aos bancos NoSQL","cargaHoraria":30,"categoria":"Banco de Dados","instrutor":"Myguel"}' | jq
 
-O projeto possui um script Bash chamado `testes.sh`, desenvolvido para automatizar as requisições da API utilizando cURL e jq.
+9.2 Consultar cursos
 
-### 10.1 Dar permissão de execução
+Listar todos:
 
-```bash
-chmod +x testes.sh
-```
+bash
+curl http://localhost:1129/cursos | jq
 
-### 10.2 Executar os testes e gerar o arquivo de log
 
-```bash
-./testes.sh > resultado_execucao.log 2>&1
-```
+Filtrar por nome:
 
-### 10.3 Visualizar o resultado da execução
+bash
+curl "http://localhost:1129/cursos?nome=MongoDB" | jq
 
-```bash
+
+Filtrar por categoria:
+
+bash
+curl "http://localhost:1129/cursos?categoria=Programação" | jq
+
+
+Filtrar por status:
+
+bash
+curl "http://localhost:1129/cursos?status=Ativo" | jq
+
+9.3 Atualizar e excluir cursos
+
+Atualizar:
+
+bash
+curl -X PATCH http://localhost:1129/cursos/ID_DO_CURSO \
+-H "Content-Type: application/json" \
+-d '{"status":"Inativo"}' | jq
+
+
+Excluir:
+
+bash
+curl -X DELETE http://localhost:1129/cursos/ID_DO_CURSO | jq
+
+9.4 Cadastrar matrículas
+
+Matrícula do Felipe:
+
+bash
+curl -X POST http://localhost:1129/matriculas \
+-H "Content-Type: application/json" \
+-d '{"nomeAluno":"Felipe","emailAluno":"felipe@gmail.com","curso":"ID_DO_CURSO"}' | jq
+
+
+Matrícula do Myguel:
+
+bash
+curl -X POST http://localhost:1129/matriculas \
+-H "Content-Type: application/json" \
+-d '{"nomeAluno":"Myguel","emailAluno":"myguel@gmail.com","curso":"ID_DO_CURSO"}' | jq
+
+9.5 Consultar matrículas
+bash
+curl http://localhost:1129/matriculas | jq
+
+9.6 Atualizar matrículas
+
+Atualizar matrícula do Myguel:
+
+bash
+curl -X PATCH http://localhost:1129/matriculas/6af5cbf4d45c5a903e1f6998 \
+-H "Content-Type: application/json" \
+-d '{"nomeAluno":"Myguel","status":"TRANCADA"}' | jq
+
+
+Atualizar matrícula do Felipe:
+
+bash
+curl -X PATCH http://localhost:1129/matriculas/6af5cbcbd45c5a903e1f6996 \
+-H "Content-Type: application/json" \
+-d '{"nomeAluno":"Felipe","status":"CONCLUIDA"}' | jq
+
+9.7 Excluir matrícula
+bash
+curl -X DELETE http://localhost:1129/matriculas/ID_DA_MATRICULA | jq
+
+9.8 Testar erros
+
+Cadastro de curso sem dados (esperado: HTTP 400):
+
+bash
+curl -i -X POST http://localhost:1129/cursos \
+-H "Content-Type: application/json" \
+-d '{}'
+
+
+Atualização de curso inexistente (esperado: HTTP 404):
+
+bash
+curl -i -X PATCH http://localhost:1129/cursos/000000000000000000000000 \
+-H "Content-Type: application/json" \
+-d '{"status":"Inativo"}'
+
+
+Observação: substitua ID_DO_CURSO e ID_DA_MATRICULA pelos identificadores reais retornados pela API. Os IDs das matrículas de Felipe e Myguel correspondem aos registros utilizados nos testes anteriores.
+
+10. Testes automatizados
+
+O projeto possui um script Bash chamado teste_cursos.sh, que automatiza as requisições utilizando cURL e jq.
+
+Executar os testes:
+
+bash
+bash teste_cursos.sh
+
+
+Gerar o arquivo de log:
+
+bash
+bash teste_cursos.sh > resultado_execucao.log 2>&1
+
+
+Visualizar o resultado:
+
+bash
 cat resultado_execucao.log
-```
 
-O arquivo `resultado_execucao.log` registra os resultados dos testes realizados nas rotas de Cursos e Matrículas.
-
-## 11. Comandos Linux
-
-Durante o desenvolvimento e gerenciamento da aplicação, foram utilizados comandos Linux.
-
-### 11.1 Visualizar processos em execução
-
-```bash
-ps aux
-```
-
-### 11.2 Localizar o processo Node.js
-
-```bash
-ps aux | grep node
-```
-
-### 11.3 Encerrar um processo pelo PID
-
-```bash
-kill NUMERO_DO_PID
-```
-
-O PID corresponde ao identificador do processo que será encerrado.
-
-## 12. Comandos Git e GitHub
-
-Comandos utilizados para controlar as versões do projeto e compartilhar alterações no repositório.
-
-### 12.1 Verificar alterações
-
-```bash
-git status
-```
-
-### 12.2 Adicionar arquivos
-
-```bash
-git add .
-```
-
-### 12.3 Criar um commit
-
-```bash
-git commit -m "Descrição das alterações"
-```
-
-### 12.4 Enviar alterações para o GitHub
-
-```bash
-git push origin main
-```
-
-### 12.5 Atualizar o repositório local
-
-```bash
-git pull origin main
-```
-
-## 13. Banco de dados
+11. Códigos de resposta HTTP
+Código	Descrição
+200	Requisição realizada com sucesso
+201	Registro criado com sucesso
+400	Dados inválidos ou erro na requisição
+404	Registro não encontrado
+500	Erro interno do servidor
+12. Banco de dados
 
 O sistema utiliza MongoDB como banco de dados NoSQL e Mongoose para realizar a modelagem e comunicação com o banco.
 
 São utilizadas duas coleções principais:
 
-- **Cursos:** armazena as informações dos cursos cadastrados.
-- **Matrículas:** armazena os dados dos alunos matriculados e a referência ao curso correspondente.
+Cursos: armazena as informações dos cursos cadastrados.
+Matrículas: armazena os dados dos alunos matriculados e a referência ao curso correspondente.
+13. Autores
 
-## 14. Autores
+Felipe Rosa da Silva
 
-**Felipe Rosa da Silva**
+Myguel Dusse Luz Leal
 
-**Myguel Dusse Luz Leal**
+Orientador: Irineu Moura Caldeira
 
-## 15. Instituição
+Instituição: Binário Tech
 
-**Binário Tech**
-
-Disciplina: Programação Back-End 1 (PBE1).
+Disciplina: Programação Back-End 1 (PBE1)
 
 Projeto Final.
