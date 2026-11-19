@@ -1,0 +1,141 @@
+# BINÁRIO CURSOS — SCRIPT DE APRESENTAÇÃO
+
+**Endereço da API:** http://localhost:1129
+
+Antes de executar os comandos, certifique-se de que o MongoDB e o servidor da API estão rodando.
+
+---
+
+# 1. CURSOS
+
+## 1.1 Listar todos os cursos
+
+
+curl http://localhost:1129/cursos | jq
+
+
+## 1.2 Cadastrar um novo curso
+
+
+curl -X POST http://localhost:1129/cursos \
+-H "Content-Type: application/json" \
+-d '{
+  "nome": "Desenvolvimento Web",
+  "descricao": "Introdução ao desenvolvimento web com Node.js",
+  "cargaHoraria": 40,
+  "categoria": "Programação",
+  "instrutor": "Felipe"
+}' | jq
+
+
+## 1.3 Filtrar cursos por nome
+
+
+curl "http://localhost:1129/cursos?nome=MongoDB" | jq
+
+
+## 1.4 Filtrar cursos por categoria
+
+
+curl "http://localhost:1129/cursos?categoria=Programação" | jq
+
+
+## 1.5 Atualizar um curso
+
+Substitua `ID_DO_CURSO` pelo ID do curso desejado.
+
+
+curl -X PATCH http://localhost:1129/cursos/ID_DO_CURSO \
+-H "Content-Type: application/json" \
+-d '{
+  "nome": "Desenvolvimento Web Atualizado",
+  "status": "Inativo"
+}' | jq
+
+
+## 1.6 Excluir um curso
+
+
+curl -X DELETE http://localhost:1129/cursos/ID_DO_CURSO | jq
+
+
+---
+
+# 2. MATRÍCULAS
+
+## 2.1 Listar todas as matrículas
+
+
+curl http://localhost:1129/matriculas | jq
+
+
+## 2.2 Cadastrar uma nova matrícula
+
+Substitua `ID_DO_CURSO` pelo ID de um curso existente.
+
+
+curl -X POST http://localhost:1129/matriculas \
+-H "Content-Type: application/json" \
+-d '{
+  "nomeAluno": "João Silva",
+  "emailAluno": "joao@gmail.com",
+  "curso": "ID_DO_CURSO"
+}' | jq
+
+
+## 2.3 Atualizar uma matrícula
+
+Substitua `ID_DA_MATRICULA` pelo ID da matrícula desejada.
+
+
+curl -X PATCH http://localhost:1129/matriculas/ID_DA_MATRICULA \
+-H "Content-Type: application/json" \
+-d '{
+  "nomeAluno": "João Silva",
+  "status": "CONCLUIDA"
+}' | jq
+
+
+**Status disponíveis:**
+
+- `ATIVA`
+- `TRANCADA`
+- `CANCELADA`
+- `SUSPENSA`
+- `CONCLUIDA`
+
+## 2.4 Excluir uma matrícula
+
+
+curl -X DELETE http://localhost:1129/matriculas/ID_DA_MATRICULA | jq
+
+
+---
+
+# 3. CONSULTAS FINAIS
+
+## Consultar cursos novamente
+
+
+curl http://localhost:1129/cursos | jq
+
+
+## Consultar matrículas novamente
+
+
+curl http://localhost:1129/matriculas | jq
+ 
+# 4. OBSERVAÇÕES PARA A APRESENTAÇÃO
+
+1. Execute primeiro o cadastro de um curso.
+2. Copie o `_id` retornado pelo cadastro do curso.
+3. Utilize esse ID para cadastrar uma matrícula vinculada ao curso.
+4. Copie o `_id` da matrícula retornada.
+5. Utilize os IDs para demonstrar as atualizações.
+6. Demonstre as exclusões e consulte novamente as listas para confirmar.
+
+**Importante:** exclua primeiro a matrícula e depois o curso, para manter a sequência da demonstração organizada.
+
+**Projeto:** Binário Cursos  
+**Tecnologias:** Node.js, Express, MongoDB e Mongoose  
+**Disciplina:** Programação Back-End 1 (PBE1)
