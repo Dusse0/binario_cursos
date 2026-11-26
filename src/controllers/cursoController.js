@@ -1,4 +1,3 @@
-
 const Curso = require('../models/Curso');
 
 const cursoController = {
