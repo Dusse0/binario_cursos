@@ -1,7 +1,7 @@
 #!/bin/bash
 
 API_URL="http://localhost:1129/cursos"
-CSV_OUT="dataset_analitico.csv"
+CSV_OUT="dataset_analitico_curso.csv"
 
 echo "[FLUXO] Extraindo dados brutos da API..."
 DADOS_JSON=$(curl -sf "$API_URL")
